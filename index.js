@@ -1,5 +1,6 @@
 const input = document.querySelector('input');
 const button = document.querySelector('button');
+
 const loc = document.querySelector('.location');
 const weatherImg = document.querySelector('.weather-img');
 const temperature = document.querySelector('.temperature');
@@ -11,6 +12,10 @@ const feelsNum = document.querySelector('.feels-num');
 const windNum = document.querySelector('.wind');
 const visibilityNum = document.querySelector('.visibility');
 
+const longitude = document.querySelector('.longitude');
+const latitude = document.querySelector('.latitude');
+
+
 //Possible weather descriptions [rain, clouds, sun, clear]
 
 async function celciusData(location) {
@@ -19,18 +24,24 @@ async function celciusData(location) {
         { mode: "cors" });
     const data = await response.json();
     const name = await data.name;
+    const country = await data.sys.country;
+    const long = await data.coord.lon;
+    const lat = await data.coord.lat;
     const feelsLike = await data.main.feels_like;
     const temp = await data.main.temp;
     const weatherDescrip = await data.weather[0].description;
     console.log(data);
-    return {name, feelsLike, temp, weatherDescrip};
+    return {name, feelsLike, temp, weatherDescrip, country, long, lat};
 }
 
 function displayInfo(info) {
     info.then((data) => {
-        loc.textContent = data.name;
+        loc.textContent = `${data.name}, ${data.country}`;
         temperature.textContent = Math.round(data.temp);
         weatherDescription.textContent = data.weatherDescrip;
+
+        longitude.textContent = data.long;
+        latitude.textContent = data.lat;
         console.log(data.name)
     })
 }
