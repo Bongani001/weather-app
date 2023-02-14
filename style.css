@@ -17,7 +17,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(255, 255, 255, .5);
+    background-color: rgb(255, 255, 255, .3);
     padding: 10px;
 }
 
@@ -42,3 +42,58 @@ nav {
     color: rgba(0, 38, 255, 0.4);
 }
 
+/**************************************
+NEWS
+***************************************/
+main {
+    display: grid;
+    place-content: center;
+}
+
+.location {
+    text-align: center;
+    margin: 30px;
+    font-size: 30px;
+}
+
+.main-info {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    gap: 15px;
+    /* border: 1px solid black; */
+    text-align: center;
+}
+.main-news {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    /* width: 200px; */
+    /* border: 1px solid black; */
+}
+
+.weather-img {
+    width: 30px;
+}
+
+.temp-info {
+    font-size: 50px;
+}
+
+.units {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+}
+
+.weather-description {
+    font-size: 20px;
+}
+
+.extras {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    /* font-size: 12px; */
+}

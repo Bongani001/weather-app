@@ -1,8 +1,15 @@
-// fe8d2d2216ecda2cbec213d949527af5;
-
 const input = document.querySelector('input');
 const button = document.querySelector('button');
 const loc = document.querySelector('.location');
+const weatherImg = document.querySelector('.weather-img');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const todayDay = document.querySelector('.today-day');
+const todayDate = document.querySelector('.today-date');
+const updatedTime = document.querySelector('.updated-time');
+const feelsNum = document.querySelector('.feels-num');
+const windNum = document.querySelector('.wind');
+const visibilityNum = document.querySelector('.visibility');
 
 async function celciusData(location) {
     const response = await fetch(
