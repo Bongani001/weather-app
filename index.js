@@ -33,6 +33,28 @@ button.addEventListener('click', ()=> {
     run(values);
 })
 
+function getCurrentDate() {
+    let currentDate = new Date;
+    let day = currentDate.getDate().toString();
+    let mon = currentDate.getMonth() + 1;
+    let month = mon.toString();
+    let year = currentDate.getFullYear();
+    let hours = currentDate.getUTCHours().toString();
+    let minutes = currentDate.getMinutes().toString();
+    if (day.length < 2) { day = "0" + day}
+    if (month.length < 2) { month = "0" + month}
+    if (hours.length < 2) { hours = "0" + hours}
+    if (minutes.length < 2) { minutes = "0" + minutes}
+    let fullDate = day + "/" + month + "/" + year;
+    let fullTime = hours + ":" + minutes;
+    console.log(fullDate, fullTime);
+}
+
+getCurrentDate();
+
+
+
+
 
 // set the default weather search
 
