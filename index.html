@@ -9,12 +9,36 @@
     <script src="./index.js" defer></script>
 </head>
 <body>
-    <div class="search">
-        <input type="text" placeholder="Search location" id="searchInput">
-        <button class="searchButton">Search</button>
-    </div>
+    <nav>
+        <h1>Weather</h1>
+        <div class="search">
+            <input type="text" placeholder="Search location" id="searchInput">
+            <button class="searchButton">Search</button>
+        </div>
+    </nav>
+    <main>
+        <h1 class="location"></h1>
+        <section class="main-info">
+            <div class="main-news">
+                <img src="" alt="">
+                <span class="temperature">45<sup>o</sup></span>
+                <div>
+                    <p>C</p>
+                    <p>F</p>
+                </div>
+            </div>
+            <p class="weather-description">Rain</p>
+            <p>Updated as of <span class="day">Tue </span><span class="date">11/02/2023 </span><span class="time">11:20</span></p>
+            <div>
+                <p class="feels">Feels like 32</p>
+                <p class="wind">Wind 13km/h</p>
+                <p class="visibility">Visibility 4 km</p>
+            </div>
+        </section>
+    </main>
+   
     
-    <h1 class="location"></h1>
-    <p></p>
+    
+    
 </body>
 </html>

@@ -11,10 +11,10 @@ async function celciusData(location) {
     const data = await response.json();
     const name = await data.name;
     const feelsLike = await data.main.feels_like;
-    const temperature = await data.main.temp;
+    const temp = await data.main.temp;
     const weatherDescription = await data.weather[0].main;
     // console.log(data);
-    return {name, feelsLike, temperature, weatherDescription};
+    return {name, feelsLike, temp, weatherDescription};
 }
 
 function run(info) {
@@ -33,6 +33,7 @@ button.addEventListener('click', ()=> {
     run(values);
 })
 
+//////////// DATE
 function getCurrentDate() {
     let currentDate = new Date;
     let day = currentDate.getDate().toString();
