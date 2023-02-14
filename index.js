@@ -2,8 +2,7 @@
 
 const input = document.querySelector('input');
 const button = document.querySelector('button');
-const p = document.querySelector('p');
-
+const loc = document.querySelector('.location');
 
 async function celciusData(location) {
     const response = await fetch(
@@ -11,23 +10,35 @@ async function celciusData(location) {
         { mode: "cors" });
     const data = await response.json();
     const name = await data.name;
-    const celcius = await data.main.feels_like;
+    const feelsLike = await data.main.feels_like;
     const temperature = await data.main.temp;
     const weatherDescription = await data.weather[0].main;
-    console.log(data);
-    return {name, celcius, temperature, weatherDescription};
+    // console.log(data);
+    return {name, feelsLike, temperature, weatherDescription};
 }
 
-function run() {
-    Promise.all([values])
-    .then((data) => {
-        p.textContent = data.name;
+function run(info) {
+    info.then((data) => {
+        loc.textContent = data.name;
+        console.log(data.name)
     })
 }
+
 button.addEventListener('click', ()=> {
     const city = input.value;
-    const values = celciusData;
-    console.log(values(city));
+    const values = celciusData(city);
+    // values.then(data => {
+    //     console.log(data)
+    // })
+    run(values);
 })
 
-celciusData('welkom')
+
+// set the default weather search
+
+function defaultSearch() {
+    const defaultWeather = celciusData('welkom');
+    run(defaultWeather);
+}
+
+defaultSearch();

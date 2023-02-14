@@ -1,0 +1,23 @@
+* {
+    margin: 0px;
+}
+
+body {
+    background-image: url('./src/background-image2.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+}
+
+.search {
+    display: flex;
+    place-content: center;
+    /* margin: 100px; */
+    gap: 10px;
+}
+
+#searchInput {
+    border: none;
+    border-radius: 5px;
+}
