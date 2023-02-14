@@ -21,6 +21,7 @@ nav {
     align-items: center;
     background-color: rgb(255, 255, 255, .3);
     padding: 10px;
+    margin-bottom: 50px;
 }
 
 .search {
@@ -59,12 +60,23 @@ main {
     font-size: 30px;
 }
 
+.co-ordinates {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.co-ordinates > img {
+    width: 30px;
+}
+
 .main-info {
     display: flex;
     flex-direction: column;
     place-items: center;
     gap: 15px;
-    /* border: 1px solid black; */
+    margin-top: 30px;
     text-align: center;
 }
 .main-news {
@@ -100,14 +112,22 @@ main {
 }
 
 .weather-description {
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .extras {
     display: flex;
-    align-items: baseline;
-    gap: 20px;
-    /* font-size: 12px; */
+    gap: 100px;
+    font-size: 12px;
+    margin-top: 30px;
+}
+
+.extras  img {
+    width: 40px;
+}
+
+.extras-item {
+    display: flex;
 }
 
 /**************************************

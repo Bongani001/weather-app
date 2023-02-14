@@ -18,6 +18,11 @@
     </nav>
     <main>
         <p class="location"></p>
+        <div class="co-ordinates">
+            <img src="./src/gps.png" alt="GPS">
+            <p>Longitude: <span class="longitude"></span></p>
+            <p>Latitude: <span class="latitude"></span></p>
+        </div>
         <section class="main-info">
             <div class="main-news">
                 <img src="./src/sun-cloud.png" class="weather-img">
@@ -34,17 +39,31 @@
                 <p><span class="today-day"></span><span class="today-date"></span></p>
             </div>
             <div class="extras">
-                <p class="feels">Feels like <span class="feels-num">32</span><sup>o</sup></p>
-                <p class="wind">Wind 13km/h</p>
-                <p class="visibility">Visibility 4 km</p>
+                <div class="extras-item">
+                    <img src="./src/thermometer.png" alt="Thermometer icon">
+                    <div>
+                        <p class="feels">Feels like </p>
+                        <p><span class="feels-num"></span><sup>o</sup>C</p>
+                    </div>
+                </div>
+                <div class="extras-item">
+                    <img src="./src/wind.png" alt="Wind icon">
+                    <div>
+                        <p>Wind Speed</p>
+                        <p class="wind"></p>
+                    </div>
+                    
+                </div>
+                <div class="extras-item">
+                    <img src="./src/humidity.png" alt="Humidity icon">
+                    <div>
+                        <p>Humidity</p>
+                        <p class="humidity"></p>
+                    </div>
+                </div>
+                
+                
             </div>
-        </section>
-        <section class="other-weather-info">
-            <div class="co-ordinates">
-                <p>Longitude: <span class="longitude"></span></p>
-                <p>Latitude: <span class="latitude"></span></p>
-            </div>
-
         </section>
     </main>
     <footer class="copyright">

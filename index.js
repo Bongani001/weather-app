@@ -2,21 +2,25 @@ const input = document.querySelector('input');
 const button = document.querySelector('button');
 
 const loc = document.querySelector('.location');
+const longitude = document.querySelector('.longitude');
+const latitude = document.querySelector('.latitude');
+
 const weatherImg = document.querySelector('.weather-img');
 const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
 const todayDay = document.querySelector('.today-day');
 const todayDate = document.querySelector('.today-date');
 const updatedTime = document.querySelector('.updated-time');
+
 const feelsNum = document.querySelector('.feels-num');
 const windNum = document.querySelector('.wind');
-const visibilityNum = document.querySelector('.visibility');
-
-const longitude = document.querySelector('.longitude');
-const latitude = document.querySelector('.latitude');
+const humidityNum = document.querySelector('.humidity');
 
 
-//Possible weather descriptions [rain, clouds, sun, clear]
+
+
+
+//Possible weather descriptions [rain, overcast clouds, sun, clear]
 
 async function celciusData(location) {
     const response = await fetch(
@@ -27,23 +31,36 @@ async function celciusData(location) {
     const country = await data.sys.country;
     const long = await data.coord.lon;
     const lat = await data.coord.lat;
-    const feelsLike = await data.main.feels_like;
     const temp = await data.main.temp;
     const weatherDescrip = await data.weather[0].description;
+    const feelsLike = await data.main.feels_like;
+    const wind = await data.wind.speed;
+    const humidity = await data.main.humidity;
     console.log(data);
-    return {name, feelsLike, temp, weatherDescrip, country, long, lat};
+    return {name, feelsLike, temp, weatherDescrip, country, long, lat, wind, humidity};
 }
 
 function displayInfo(info) {
     info.then((data) => {
         loc.textContent = `${data.name}, ${data.country}`;
-        temperature.textContent = Math.round(data.temp);
-        weatherDescription.textContent = data.weatherDescrip;
-
         longitude.textContent = data.long;
         latitude.textContent = data.lat;
+        temperature.textContent = Math.round(data.temp);
+        weatherDescription.textContent = data.weatherDescrip;
+        feelsNum.textContent = Math.round(data.feelsLike);
+        let speed = data.wind * 3.6;
+        speed = Math.round(speed * 10) / 10;
+        windNum.textContent = `${speed} km/h`;
+        humidityNum.textContent = `${data.humidity} %`
         console.log(data.name)
     })
+}
+
+function callAllInfo() {
+    getCurrentDate();
+    const city = input.value;
+    const values = celciusData(city);
+    displayInfo(values);
 }
 
 
@@ -102,27 +119,16 @@ function getCurrentDate() {
     
 }
 
-getCurrentDate();
-
-
-// EVENT LISTERNERS
-
-button.addEventListener('click', ()=> {
-    const city = input.value;
-    const values = celciusData(city);
-    // values.then(data => {
-    //     console.log(data)
-    // })
-    displayInfo(values);
-})
-
-
-
 // set the default weather search
 
 function defaultSearch() {
+    getCurrentDate();
     const defaultWeather = celciusData('welkom');
     displayInfo(defaultWeather);
 }
 
 defaultSearch();
+
+// EVENT LISTERNERS
+
+button.addEventListener('click', callAllInfo)
