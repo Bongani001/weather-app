@@ -21,7 +21,7 @@ async function celciusData(location) {
     const name = await data.name;
     const feelsLike = await data.main.feels_like;
     const temp = await data.main.temp;
-    const weatherDescrip = await data.weather[0].main;
+    const weatherDescrip = await data.weather[0].description;
     console.log(data);
     return {name, feelsLike, temp, weatherDescrip};
 }
@@ -45,8 +45,11 @@ function getCurrentDate() {
     let month = mon.toString();
     let year = currentDate.getFullYear();
     let hour = currentDate.getUTCHours() + 2;
+    hour = hour % 12;
+    hour = hour ? hour : 12; // the hour '0' to be '12'
     let hours = hour.toString();
-    let minutes = currentDate.getMinutes().toString();
+    let minutes = currentDate.getMinutes().toString(); 
+    
     if (day.length < 2) { day = "0" + day}
     if (month.length < 2) { month = "0" + month}
     if (hours.length < 2) { hours = "0" + hours}
@@ -57,26 +60,33 @@ function getCurrentDate() {
     let today;
     switch (new Date().getDay()) {
         case 0:
-          today = "Sunday";
+          today = "Sun";
           break;
         case 1:
-          today = "Monday";
+          today = "Mon";
           break;
         case 2:
-           today = "Tuesday";
+           today = "Tue";
           break;
         case 3:
-          today = "Wednesday";
+          today = "Wed";
           break;
         case 4:
-          today = "Thursday";
+          today = "Thur";
           break;
         case 5:
-          today = "Friday";
+          today = "Fri";
           break;
         case 6:
-          today = "Saturday";
+          today = "Sat";
     }
+
+    // am/pm format
+    let ampm = hours < 12 ? 'AM' : 'PM';
+
+    todayDay.textContent = `${today}, `;
+    todayDate.textContent = `${fullDate} `;
+    updatedTime.textContent = `${fullTime} ${ampm} GMT +2`;
     console.log(today, fullDate, fullTime);
     
 }

@@ -73,7 +73,8 @@ main {
 }
 
 .weather-img {
-    width: 30px;
+    width: 40px;
+    object-fit: contain;
 }
 
 .temp-info {
@@ -105,3 +106,18 @@ main {
     gap: 20px;
     /* font-size: 12px; */
 }
+
+/**************************************
+FOOTER
+***************************************/
+
+.copyright {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    color: white;
+    width: 100vw;
+    /* bottom: 0px; */
+    padding: 10px;
+    gap: 5px;
+  }
