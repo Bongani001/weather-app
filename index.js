@@ -18,12 +18,6 @@ const feelsNum = document.querySelector('.feels-num');
 const windNum = document.querySelector('.wind');
 const humidityNum = document.querySelector('.humidity');
 
-
-
-
-
-//Possible weather descriptions [rain, overcast clouds, sun, clear, haze]
-
 async function celciusData(location) {
     const response = await fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=fe8d2d2216ecda2cbec213d949527af5&units=metric",
@@ -35,11 +29,12 @@ async function celciusData(location) {
     const lat = await data.coord.lat;
     const temp = await data.main.temp;
     const weatherDescrip = await data.weather[0].description;
+    const mainWeather = await data.weather[0].main;
     const feelsLike = await data.main.feels_like;
     const wind = await data.wind.speed;
     const humidity = await data.main.humidity;
     console.log(data);
-    return {name, feelsLike, temp, weatherDescrip, country, long, lat, wind, humidity};
+    return {name, feelsLike, temp, weatherDescrip, mainWeather, country, long, lat, wind, humidity};
 }
 
 function displayInfo(info) {
@@ -68,21 +63,33 @@ function displayInfo(info) {
           feelsNum.textContent = Math.round(data.feelsLike * 1.8) + 32;
           fahrenheit.classList = 'fahrenheit';
           celcius.classList = 'celcius dim';
-
         })
+
+        // display weather icon
+        //Possible weather descriptions [rain,clouds, clear, snow, haze]
+        if (data.mainWeather === 'Clouds') {
+          weatherImg.src = './src/cloud.png';
+        } else if (data.mainWeather === 'Rain') {
+          weatherImg.src = './src/rain.png';
+        } else if (data.mainWeather === 'Clear') {
+          weatherImg.src = './src/sun.png';
+        } else if (data.mainWeather === 'Snow') {
+          weatherImg.src = './src/snow-cloud.png';
+        }
     })
 }
 
-function callAllInfo() {
+async function callAllInfo() {
+    try {
     getCurrentDate();
     const city = input.value;
-    const values = celciusData(city)
-    .catch((err) => {
-      alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling. \n Joburg or JHB (wrong) \n Johannesburg (right)');
-      // console.error('There\'s an error', err);
-      throw new Error('Can\'t find location');
-    });
+    const values = await celciusData(city);
     displayInfo(values);
+    } catch (err) {
+      alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling. \n Joburg or JHB (wrong) \n Johannesburg (right)');
+      // console.error('Can\'t find location', err);
+      throw Error('Can\'t find location', err);
+    };
 }
 
 
