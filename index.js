@@ -66,30 +66,31 @@ function displayInfo(info) {
         })
 
         // display weather icon
-        //Possible weather descriptions [rain,clouds, clear, snow, haze]
+        //Possible weather descriptions [rain,clouds, clear, haze]
         if (data.mainWeather === 'Clouds') {
           weatherImg.src = './src/cloud.png';
         } else if (data.mainWeather === 'Rain') {
           weatherImg.src = './src/rain.png';
         } else if (data.mainWeather === 'Clear') {
           weatherImg.src = './src/sun.png';
-        } else if (data.mainWeather === 'Snow') {
-          weatherImg.src = './src/snow-cloud.png';
+        } else if (data.mainWeather === 'Rain') {
+          weatherImg.src = './src/rain.png';
         }
+    }).catch((err) => {
+      console.error('Cant read name');
     })
 }
 
-async function callAllInfo() {
-    try {
+function callAllInfo() {
     getCurrentDate();
     const city = input.value;
-    const values = await celciusData(city);
-    displayInfo(values);
-    } catch (err) {
+    const values = celciusData(city)
+    .catch((err) => {
       alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling. \n Joburg or JHB (wrong) \n Johannesburg (right)');
-      // console.error('Can\'t find location', err);
-      throw Error('Can\'t find location', err);
-    };
+      console.error('There\'s an error', err);
+      // throw new Error('Can\'t find location');
+    });
+    displayInfo(values);
 }
 
 
