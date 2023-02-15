@@ -20,7 +20,7 @@ const humidityNum = document.querySelector('.humidity');
 
 
 
-//Possible weather descriptions [rain, overcast clouds, sun, clear]
+//Possible weather descriptions [rain, overcast clouds, sun, clear, haze]
 
 async function celciusData(location) {
     const response = await fetch(
@@ -36,7 +36,7 @@ async function celciusData(location) {
     const feelsLike = await data.main.feels_like;
     const wind = await data.wind.speed;
     const humidity = await data.main.humidity;
-    console.log(data);
+    // console.log(data);
     return {name, feelsLike, temp, weatherDescrip, country, long, lat, wind, humidity};
 }
 
@@ -51,15 +51,19 @@ function displayInfo(info) {
         let speed = data.wind * 3.6;
         speed = Math.round(speed * 10) / 10;
         windNum.textContent = `${speed} km/h`;
-        humidityNum.textContent = `${data.humidity} %`
-        console.log(data.name)
+        humidityNum.textContent = `${data.humidity} %`;
     })
 }
 
 function callAllInfo() {
     getCurrentDate();
     const city = input.value;
-    const values = celciusData(city);
+    const values = celciusData(city)
+    .catch((err) => {
+      alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling.');
+      // console.error('There\'s an error', err);
+      throw new Error('Can\'t find location');
+    });
     displayInfo(values);
 }
 
@@ -115,15 +119,17 @@ function getCurrentDate() {
     todayDay.textContent = `${today}, `;
     todayDate.textContent = `${fullDate} `;
     updatedTime.textContent = `${fullTime} ${ampm} GMT +2`;
-    console.log(today, fullDate, fullTime);
-    
 }
 
 // set the default weather search
 
 function defaultSearch() {
     getCurrentDate();
-    const defaultWeather = celciusData('welkom');
+    const defaultWeather = celciusData('welkom')
+    .catch((err) => {
+      console.error(err);
+      alert('Something went wrong with fetching data from the server');
+    });
     displayInfo(defaultWeather);
 }
 
