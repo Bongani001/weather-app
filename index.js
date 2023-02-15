@@ -7,6 +7,8 @@ const latitude = document.querySelector('.latitude');
 
 const weatherImg = document.querySelector('.weather-img');
 const temperature = document.querySelector('.temperature');
+const celcius = document.querySelector('.celcius');
+const fahrenheit = document.querySelector('.fahrenheit');
 const weatherDescription = document.querySelector('.weather-description');
 const todayDay = document.querySelector('.today-day');
 const todayDate = document.querySelector('.today-date');
@@ -36,7 +38,7 @@ async function celciusData(location) {
     const feelsLike = await data.main.feels_like;
     const wind = await data.wind.speed;
     const humidity = await data.main.humidity;
-    // console.log(data);
+    console.log(data);
     return {name, feelsLike, temp, weatherDescrip, country, long, lat, wind, humidity};
 }
 
@@ -48,10 +50,26 @@ function displayInfo(info) {
         temperature.textContent = Math.round(data.temp);
         weatherDescription.textContent = data.weatherDescrip;
         feelsNum.textContent = Math.round(data.feelsLike);
-        let speed = data.wind * 3.6;
+        let speed = data.wind * 3.6; // convert meter/second to km/h
         speed = Math.round(speed * 10) / 10;
         windNum.textContent = `${speed} km/h`;
-        humidityNum.textContent = `${data.humidity} %`;
+        humidityNum.textContent = `${data.humidity}%`;
+
+
+        // Change to show temperature in celcius or fahrenheit
+        celcius.addEventListener('click', () => {
+          temperature.textContent = Math.round(data.temp);
+          feelsNum.textContent = Math.round(data.feelsLike);
+          celcius.classList = 'celcius';
+          fahrenheit.classList = 'fahrenheit dim';
+        });
+        fahrenheit.addEventListener('click', () => {
+          temperature.textContent = Math.round(data.temp * 1.8) + 32;
+          feelsNum.textContent = Math.round(data.feelsLike * 1.8) + 32;
+          fahrenheit.classList = 'fahrenheit';
+          celcius.classList = 'celcius dim';
+
+        })
     })
 }
 
@@ -60,7 +78,7 @@ function callAllInfo() {
     const city = input.value;
     const values = celciusData(city)
     .catch((err) => {
-      alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling.');
+      alert('Something went wrong with fetching data from the server \n check whether you got the correct spelling. \n Joburg or JHB (wrong) \n Johannesburg (right)');
       // console.error('There\'s an error', err);
       throw new Error('Can\'t find location');
     });
@@ -77,6 +95,8 @@ function getCurrentDate() {
     let month = mon.toString();
     let year = currentDate.getFullYear();
     let hour = currentDate.getUTCHours() + 2;
+    // am/pm format
+    let ampm = hour < 12 ? 'AM' : 'PM';
     hour = hour % 12;
     hour = hour ? hour : 12; // the hour '0' to be '12'
     let hours = hour.toString();
@@ -113,12 +133,9 @@ function getCurrentDate() {
           today = "Sat";
     }
 
-    // am/pm format
-    let ampm = hours < 12 ? 'AM' : 'PM';
-
     todayDay.textContent = `${today}, `;
     todayDate.textContent = `${fullDate} `;
-    updatedTime.textContent = `${fullTime} ${ampm} GMT +2`;
+    updatedTime.textContent = `${fullTime} ${ampm} SAST`;
 }
 
 // set the default weather search

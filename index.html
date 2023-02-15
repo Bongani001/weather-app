@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./src/sun.png" />
     <title>Weather | Gelo</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./index.js" defer></script>
@@ -12,7 +13,7 @@
     <nav>
         <h1>Weather</h1>
         <div class="search">
-            <input type="text" placeholder="Search city, state or country" id="searchInput">
+            <input type="text" placeholder="Search city or state" id="searchInput">
             <button class="searchButton">Search</button>
         </div>
     </nav>
@@ -28,9 +29,9 @@
                 <img src="./src/sun-cloud.png" class="weather-img">
                 <p class="temp-info"><span class="temperature"></span><sup>o</sup></p>
                 <div class="units">
-                    <p>C</p>
+                    <p class="celcius">C</p>
                     <hr>
-                    <p>F</p>
+                    <p class="fahrenheit dim">F</p>
                 </div>
             </div>
             <p class="weather-description"></p>

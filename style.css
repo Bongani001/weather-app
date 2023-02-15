@@ -112,6 +112,16 @@ main {
     padding: 0px;
 }
 
+.celcius,
+.fahrenheit {
+    cursor: pointer;
+}
+
+.celcius.dim,
+.fahrenheit.dim {
+    color: rgb(255, 255, 255, .3);
+}
+
 .weather-description {
     font-size: 25px;
 }
